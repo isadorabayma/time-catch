@@ -14,6 +14,10 @@
   pointer-events: none;
 }
 
+.App-timer-number {
+  font-size: calc(10px + 8vmin);
+}
+
 .App-play {
   height: 24vmin;
   pointer-events: none;
