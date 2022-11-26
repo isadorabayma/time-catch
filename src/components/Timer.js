@@ -1,5 +1,7 @@
 // import logo from '../assets/play.png';
 import React, { Component } from "react";
+import BtnPause from "./BtnPause";
+import BtnStart from "./BtnStart";
 
 class Timer extends Component {
     constructor() {
@@ -7,6 +9,8 @@ class Timer extends Component {
         this.state = {
             seconds: 0,
             minutes: 0,
+            showstart: false,
+            showpause: true,
         }
     }
 
@@ -18,11 +22,10 @@ class Timer extends Component {
                 </p>
                 <div className="App-timer">
                     {/* <img src={logo} className="App-play" alt="logo" /> */}
-                    <h2 className="App-timer-number">0{this.state.seconds}:0{this.state.minutes}</h2>
+                    <h2 className="App-timer-number">0{this.state.minutes}:0{this.state.seconds}</h2>
                 </div>
-                <p>
-                    Start
-                </p>
+                <BtnStart/>
+                <BtnPause/>
             </div>
         )
     }
