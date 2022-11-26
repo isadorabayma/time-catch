@@ -5,11 +5,14 @@ class Timer extends Component {
     render() {
         return(
             <div className="App-header">
+                <p>
+                    . Timer  . | . Pomodoro . | . Counter .
+                </p>
                 <div className="App-timer">
                     <img src={logo} className="App-play" alt="logo" />
                 </div>
                 <p>
-                    Hello world
+                    Start
                 </p>
             </div>
         )
