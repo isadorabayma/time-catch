@@ -16,6 +16,7 @@ class Timer extends Component {
         this.startTimer = this.startTimer.bind(this);
         this.pauseTimer = this.pauseTimer.bind(this);
         this.stopTimer = this.stopTimer.bind(this);
+        this.resumeTimer = this.resumeTimer.bind(this);
     }
 
     startTimer() {
@@ -30,7 +31,27 @@ class Timer extends Component {
             showPause: !prevState.showPause,
         }));
     }
+    
+    pauseTimer() {
+        clearInterval(this.intervalId)
+        this.setState((prevState) => ({
+            showResume: !prevState.showResume,
+            showPause: !prevState.showPause,
+        }));
+    }
 
+    resumeTimer() {
+        this.intervalId = setInterval(() => {
+            this.setState((prevState) => ({
+                seconds: prevState.seconds + 1,
+            }));
+        }, 1000);
+        this.setState((prevState) => ({
+            showResume: !prevState.showResume,
+            showPause: !prevState.showPause,
+        }));
+    }
+    
     stopTimer() {
         clearInterval(this.intervalId)
         this.setState((prevState) => ({
@@ -38,25 +59,15 @@ class Timer extends Component {
             showStop: !prevState.showStop,
             showPause: false,
             showResume: false,
-        }));
-    }
-
-    pauseTimer() {
-        this.setState((prevState) => ({
-            showResume: !prevState.showResume,
-            showPause: !prevState.showPause,
+            seconds: 0,
+            minutes: 0,
         }));
     }
 
     render() {
         const { showPause, showStart, showStop, showResume } = this.state
         return(
-            <div className="App-header">
-                <div className="Align-Line">
-                    <Button title="Timer" />
-                    <Button title="Pomodoro"/>
-                    <Button title="Counter"/>
-                </div>
+            <>
                 <div className="App-timer">
                     <h2 className="App-timer-number">
                         0{this.state.minutes}:0{this.state.seconds}
@@ -66,9 +77,9 @@ class Timer extends Component {
                     {showStart && <Button onClick={this.startTimer} title="Start"/>}
                     {showStop && <Button onClick={this.stopTimer} title="Stop"/>}
                     {showPause && <Button onClick={this.pauseTimer} title="Pause" />}
-                    {showResume && <Button onClick={this.pauseTimer} title="Resume" />}
+                    {showResume && <Button onClick={this.resumeTimer} title="Resume" />}
                 </div>
-            </div>
+            </>
         )
     }
 }
