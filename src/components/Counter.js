@@ -21,31 +21,13 @@ class Counter extends Component {
         this.resumeTimer = this.resumeTimer.bind(this);
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if(prevState.seconds === 9 ) {
-            this.setState({
-                zSeconds: null,
-            })
-        }
-        if(prevState.seconds === 59 ) {
-            this.setState({
-                zSeconds: 0,
-                seconds: 0,
-                minutes: prevState.minutes + 1,
-
-            })
-        }
-        if(prevState.minutes === 9 ) {
-            this.setState({
-                zMinutes: null,
-            })
-        }
-    }
-
     startTimer() {
         this.intervalId = setInterval(() => {
             this.setState((prevState) => ({
-                seconds: prevState.seconds + 1,
+                seconds: prevState.seconds === 59 ? 0 : prevState.seconds + 1,
+                minutes: prevState.seconds === 59 ? prevState.minutes + 1 : prevState.minutes,
+                zSeconds: prevState.seconds === 9 ? null : (prevState.seconds === 59 ? 0 : prevState.zSeconds),
+                zMinutes: (prevState.minutes === 9 && prevState.seconds === 59) ? null : prevState.zMinutes,
             }));
         }, 1000);
         this.setState((prevState) => ({
@@ -66,7 +48,10 @@ class Counter extends Component {
     resumeTimer() {
         this.intervalId = setInterval(() => {
             this.setState((prevState) => ({
-                seconds: prevState.seconds + 1,
+                seconds: prevState.seconds === 59 ? 0 : prevState.seconds + 1,
+                minutes: prevState.seconds === 59 ? prevState.minutes + 1 : prevState.minutes,
+                zSeconds: prevState.seconds === 9 ? null : (prevState.seconds === 59 ? 0 : prevState.zSeconds),
+                zMinutes: (prevState.minutes === 9 && prevState.seconds === 59) ? null : prevState.zMinutes,
             }));
         }, 1000);
         this.setState((prevState) => ({

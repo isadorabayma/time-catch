@@ -1,6 +1,8 @@
 import React, {Component} from "react";
 import Button from "./Button";
-import Timer from "./Timer";
+import Counter from "./Counter";
+// import Timer from "./Timer";
+// import Pomodoro from "./Pomodoro";
 
 class Body extends Component {
   render() {
@@ -11,7 +13,9 @@ class Body extends Component {
               <Button title="Pomodoro"/>
               <Button title="Counter"/>
           </div>
-          <Timer/>
+          {/* <Timer/> */}
+          <Counter/>
+          {/* <Pomodoro/> */}
       </div>
     )
   }
