@@ -15,21 +15,29 @@ class Timer extends Component {
 
         this.startTimer = this.startTimer.bind(this);
         this.pauseTimer = this.pauseTimer.bind(this);
+        this.stopTimer = this.stopTimer.bind(this);
     }
 
-    componentDidMount() {
-        setInterval(() => {
+    startTimer() {
+        this.intervalId = setInterval(() => {
             this.setState((prevState) => ({
                 seconds: prevState.seconds + 1,
             }));
         }, 1000);
-    }
-
-    startTimer() {
         this.setState((prevState) => ({
             showStart: !prevState.showStart,
             showStop: !prevState.showStop,
             showPause: !prevState.showPause,
+        }));
+    }
+
+    stopTimer() {
+        clearInterval(this.intervalId)
+        this.setState((prevState) => ({
+            showStart: !prevState.showStart,
+            showStop: !prevState.showStop,
+            showPause: false,
+            showResume: false,
         }));
     }
 
@@ -56,7 +64,7 @@ class Timer extends Component {
                 </div>
                 <div className="Align-Line">
                     {showStart && <Button onClick={this.startTimer} title="Start"/>}
-                    {showStop && <Button onClick={this.startTimer} title="Stop"/>}
+                    {showStop && <Button onClick={this.stopTimer} title="Stop"/>}
                     {showPause && <Button onClick={this.pauseTimer} title="Pause" />}
                     {showResume && <Button onClick={this.pauseTimer} title="Resume" />}
                 </div>
