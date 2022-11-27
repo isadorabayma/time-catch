@@ -7,6 +7,8 @@ class Timer extends Component {
         this.state = {
             seconds: 0,
             minutes: 0,
+            zSeconds: 0,
+            zMinutes: 0,
             showStart: true,
             showPause: false,
             showStop: false,
@@ -17,6 +19,27 @@ class Timer extends Component {
         this.pauseTimer = this.pauseTimer.bind(this);
         this.stopTimer = this.stopTimer.bind(this);
         this.resumeTimer = this.resumeTimer.bind(this);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevState.seconds === 9 ) {
+            this.setState({
+                zSeconds: null,
+            })
+        }
+        if(prevState.seconds === 59 ) {
+            this.setState({
+                zSeconds: 0,
+                seconds: 0,
+                minutes: prevState.minutes + 1,
+
+            })
+        }
+        if(prevState.minutes === 9 ) {
+            this.setState({
+                zMinutes: null,
+            })
+        }
     }
 
     startTimer() {
@@ -61,16 +84,19 @@ class Timer extends Component {
             showResume: false,
             seconds: 0,
             minutes: 0,
+            zSeconds: 0,
+            zMinutes: 0,
         }));
     }
 
     render() {
-        const { showPause, showStart, showStop, showResume } = this.state
+        const { showPause, showStart, showStop, showResume, 
+            zMinutes, zSeconds, seconds, minutes } = this.state
         return(
             <>
                 <div className="App-timer">
                     <h2 className="App-timer-number">
-                        0{this.state.minutes}:0{this.state.seconds}
+                        {zMinutes}{minutes}:{zSeconds}{seconds}
                     </h2>
                 </div>
                 <div className="Align-Line">
