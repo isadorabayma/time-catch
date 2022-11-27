@@ -24,8 +24,10 @@ class Timer extends Component {
                     {/* <img src={logo} className="App-play" alt="logo" /> */}
                     <h2 className="App-timer-number">0{this.state.minutes}:0{this.state.seconds}</h2>
                 </div>
-                <BtnStart/>
-                <BtnPause/>
+                <div className="Align-Line">
+                    <BtnStart/>
+                    <BtnPause/>
+                </div>
             </div>
         )
     }
