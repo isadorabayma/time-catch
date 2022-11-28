@@ -58,10 +58,24 @@ class Timer extends Component {
 
     resumeTimer() {
         this.intervalId = setInterval(() => {
-            this.setState((prevState) => ({
-                seconds: prevState.seconds + 1,
-            }));
+            const { seconds, minutes } = this.state
+            if ((minutes + seconds) !== 0) {
+                this.setState((prevState) => ({
+                    seconds: prevState.seconds === 0 ? 59 : prevState.seconds - 1,
+                    minutes: prevState.seconds === 0 ? prevState.minutes - 1 : prevState.minutes,
+                    zSeconds: prevState.seconds === 0 ? null : (prevState.seconds === 10 ? 0 : prevState.zSeconds),
+                    zMinutes: (prevState.minutes === 10 && prevState.seconds === 0) ? 0 : prevState.zMinutes,
+                }));
+            } else {
+                this.setState((prevState) => ({
+                    showStart: !prevState.showStart,
+                    showStop: !prevState.showStop,
+                    showPause: !prevState.showPause,
+                }));
+                clearInterval(this.intervalId)
+            };
         }, 1000);
+        
         this.setState((prevState) => ({
             showResume: !prevState.showResume,
             showPause: !prevState.showPause,
