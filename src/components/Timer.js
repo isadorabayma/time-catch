@@ -24,39 +24,23 @@ class Timer extends Component {
     startTimer() {
         this.intervalId = setInterval(() => {
             const { seconds, minutes } = this.state
-            // if (seconds === 0 && minutes > 0) {
-            //     this.setState((prevState) => ({
-            //         seconds: 59,
-            //         zSeconds: null,
-            //         minutes: prevState.minutes - 1,
-            //     }));
-            // } else if (minutes < 10 && seconds > 10) {
-            //     this.setState((prevState) => ({
-            //         zMinutes: 0,
-            //         seconds: prevState.seconds - 1,
-            //     }));
-            // } else if (seconds > 10) {
-            //     this.setState((prevState) => ({
-            //         seconds: prevState.seconds - 1,
-            //     }));
-            // } else if (seconds > 0) {
-            //     this.setState((prevState) => ({
-            //         seconds: prevState.seconds - 1,
-            //         zSeconds: 0,
-            //     }));
-            // } else {
-            //     clearInterval(this.intervalId)
-            // };
-            this.setState((prevState) => ({
-                seconds: prevState.seconds === 0 ? 59 : prevState.seconds - 1,
-                minutes: prevState.seconds === 0 ? prevState.minutes - 1 : prevState.minutes,
-                zSeconds: prevState.seconds === 0 ? null : (prevState.seconds === 10 ? 0 : prevState.zSeconds),
-                zMinutes: (prevState.minutes === 10 && prevState.seconds === 0) ? 0 : prevState.zMinutes,
-            }));
-            if(minutes === 0 & seconds === 0) {
-                    clearInterval(this.intervalId)
-                };
+            if ((minutes + seconds) !== 0) {
+                this.setState((prevState) => ({
+                    seconds: prevState.seconds === 0 ? 59 : prevState.seconds - 1,
+                    minutes: prevState.seconds === 0 ? prevState.minutes - 1 : prevState.minutes,
+                    zSeconds: prevState.seconds === 0 ? null : (prevState.seconds === 10 ? 0 : prevState.zSeconds),
+                    zMinutes: (prevState.minutes === 10 && prevState.seconds === 0) ? 0 : prevState.zMinutes,
+                }));
+            } else {
+                this.setState((prevState) => ({
+                    showStart: !prevState.showStart,
+                    showStop: !prevState.showStop,
+                    showPause: !prevState.showPause,
+                }));
+                clearInterval(this.intervalId)
+            };
         }, 1000);
+
         this.setState((prevState) => ({
             showStart: !prevState.showStart,
             showStop: !prevState.showStop,
