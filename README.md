@@ -1,3 +1,13 @@
+# to do list to the project
+
+-[]1-TIMER criar aleta ao finalizar
+-[]2-TIMER possibilitar a modificação do tempo padrão
+-[]3-COUNTER criar alerta de passados 25min
+-[]4-POMODORO fazer funcionar
+-[]5-BACKEND criar categorias de tarefas
+-[]6-BACKEND salvar tempo gastos em cada tarefa
+-[]7-TEST make tests
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
