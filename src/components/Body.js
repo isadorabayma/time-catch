@@ -8,9 +8,9 @@ class Body extends Component {
     constructor() {
         super();
         this.state = {
-            showTimer: true,
+            showTimer: false,
             showPomodoro: false,
-            showCounter: false,
+            showCounter: true,
         }
 
         this.chooseType = this.chooseType.bind(this);
@@ -29,8 +29,8 @@ class Body extends Component {
         return(
         <div className="App-header">
             <div className="Align-Line">
-                <Button onClick={() => {this.chooseType("Timer")}} title="Timer" />
-                <Button onClick={() => {this.chooseType("Pomodoro")}} title="Pomodoro"/>
+                {/* <Button onClick={() => {this.chooseType("Timer")}} title="Timer" />
+                <Button onClick={() => {this.chooseType("Pomodoro")}} title="Pomodoro"/> */}
                 <Button onClick={() => {this.chooseType("Counter")}} title="Counter"/>
             </div>
             {showTimer && <Timer/>}

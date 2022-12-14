@@ -23,6 +23,7 @@ class Counter extends Component {
         this.pauseTimer = this.pauseTimer.bind(this);
         this.stopTimer = this.stopTimer.bind(this);
         this.resumeTimer = this.resumeTimer.bind(this);
+        this.saveTimer = this.saveTimer.bind(this);
     }
 
     startTimer() {
@@ -67,6 +68,7 @@ class Counter extends Component {
     stopTimer() {
         clearInterval(this.intervalId)
         this.setState((prevState) => ({
+            showSave: !prevState.showSave,
             showStop: !prevState.showStop,
             showPause: false,
             showResume: false,
@@ -74,9 +76,24 @@ class Counter extends Component {
         }));
     }
 
+    saveTimer() {
+        clearInterval(this.intervalId)
+        this.setState((prevState) => ({
+            showSave: !prevState.showSave,
+            showStart: !prevState.showStart,
+            showCategorys: false,
+            categorySelected: "Select a category",
+            seconds: 0,
+            minutes: 0,
+            zSeconds: 0,
+            zMinutes: 0,
+        }));
+    }
+
     render() {
-        const { showPause, showStart, showStop, showResume, showCategorys,
-            categorysList, categorySelected, zMinutes, zSeconds, seconds, minutes } = this.state
+        const { showPause, showStart, showStop, showResume, showCategorys, showSave,
+            categorysList, categorySelected,
+            zMinutes, zSeconds, seconds, minutes } = this.state
         return(
             <>
                 {showCategorys && <Categorys categorysList={ categorysList } selected={ categorySelected } />}
@@ -90,6 +107,7 @@ class Counter extends Component {
                     {showStop && <Button onClick={ this.stopTimer } title="Stop"/>}
                     {showPause && <Button onClick={ this.pauseTimer } title="Pause" />}
                     {showResume && <Button onClick={ this.resumeTimer } title="Resume" />}
+                    {showSave && <Button onClick={ this.saveTimer } title="Save" />}
                 </div>
             </>
         )
