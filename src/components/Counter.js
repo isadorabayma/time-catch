@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Button from "./Button";
+import Categorys from "./Categorys";
 
 class Counter extends Component {
     constructor() {
@@ -9,10 +10,13 @@ class Counter extends Component {
             minutes: 0,
             zSeconds: 0,
             zMinutes: 0,
+            categorysList: ["Casa", "Programação", "Obra", "Lazer"],
+            selected: "Select a category",
             showStart: true,
             showPause: false,
             showStop: false,
             showResume: false,
+            showCategorys: false,
         }
 
         this.startTimer = this.startTimer.bind(this);
@@ -63,20 +67,16 @@ class Counter extends Component {
     stopTimer() {
         clearInterval(this.intervalId)
         this.setState((prevState) => ({
-            showStart: !prevState.showStart,
             showStop: !prevState.showStop,
             showPause: false,
             showResume: false,
-            seconds: 0,
-            minutes: 0,
-            zSeconds: 0,
-            zMinutes: 0,
+            showCategorys: true,
         }));
     }
 
     render() {
-        const { showPause, showStart, showStop, showResume, 
-            zMinutes, zSeconds, seconds, minutes } = this.state
+        const { showPause, showStart, showStop, showResume, showCategorys,
+            categorysList, selected, zMinutes, zSeconds, seconds, minutes } = this.state
         return(
             <>
                 <div className="App-timer">
@@ -85,10 +85,11 @@ class Counter extends Component {
                     </h2>
                 </div>
                 <div className="Align-Line">
-                    {showStart && <Button onClick={this.startTimer} title="Start"/>}
-                    {showStop && <Button onClick={this.stopTimer} title="Stop"/>}
-                    {showPause && <Button onClick={this.pauseTimer} title="Pause" />}
-                    {showResume && <Button onClick={this.resumeTimer} title="Resume" />}
+                    {showStart && <Button onClick={ this.startTimer } title="Start"/>}
+                    {showStop && <Button onClick={ this.stopTimer } title="Stop"/>}
+                    {showPause && <Button onClick={ this.pauseTimer } title="Pause" />}
+                    {showResume && <Button onClick={ this.resumeTimer } title="Resume" />}
+                    {showCategorys && <Categorys categorysList={ categorysList } selected={ selected } />}
                 </div>
             </>
         )
