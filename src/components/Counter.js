@@ -11,7 +11,7 @@ class Counter extends Component {
             zSeconds: 0,
             zMinutes: 0,
             categorysList: ["Casa", "Programação", "Obra", "Lazer"],
-            selected: "Select a category",
+            categorySelected: "Select a category",
             showStart: true,
             showPause: false,
             showStop: false,
@@ -76,9 +76,10 @@ class Counter extends Component {
 
     render() {
         const { showPause, showStart, showStop, showResume, showCategorys,
-            categorysList, selected, zMinutes, zSeconds, seconds, minutes } = this.state
+            categorysList, categorySelected, zMinutes, zSeconds, seconds, minutes } = this.state
         return(
             <>
+                {showCategorys && <Categorys categorysList={ categorysList } selected={ categorySelected } />}
                 <div className="App-timer">
                     <h2 className="App-timer-number">
                         {zMinutes}{minutes}:{zSeconds}{seconds}
@@ -89,7 +90,6 @@ class Counter extends Component {
                     {showStop && <Button onClick={ this.stopTimer } title="Stop"/>}
                     {showPause && <Button onClick={ this.pauseTimer } title="Pause" />}
                     {showResume && <Button onClick={ this.resumeTimer } title="Resume" />}
-                    {showCategorys && <Categorys categorysList={ categorysList } selected={ selected } />}
                 </div>
             </>
         )
