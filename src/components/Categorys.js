@@ -23,7 +23,6 @@ class Categorys extends Component {
             <div>
                 <select 
                     className="Drop-btn" value={ selected } onChange={ this.handleChange } >
-                {/* <select className="Drop-btn" value={ selected }> */}
                     { categorysList.map((category) => (
                             <option value={ category } key={ category }>{ category }</option>
                         ) 
