@@ -78,6 +78,7 @@
 }
 
 .Drop-btn {
+  background-color: #41454d;
   color: white;
   font-size: calc(10px + 2vmin);
   border: none;
