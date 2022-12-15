@@ -96,8 +96,8 @@ class Counter extends Component {
             zMinutes, zSeconds, seconds, minutes } = this.state
         return(
             <>
-                {showCategorys && <Categorys categorysList={ categorysList } selected={ categorySelected } />}
                 <div className="App-timer">
+                    {showCategorys && <Categorys categorysList={ categorysList } selected={ categorySelected } />}
                     <h2 className="App-timer-number">
                         {zMinutes}{minutes}:{zSeconds}{seconds}
                     </h2>
