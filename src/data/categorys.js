@@ -1,47 +1,47 @@
 const categorys = [
   { 
     id: 1,
-    category: 'select a category',
+    name: 'select a category',
     parentId: null,
   },
   { 
     id: 2,
-    category: 'Home',
+    name: 'Home',
     parentId: 1,
   },
   { 
     id: 3,
-    category: 'Job',
+    name: 'Job',
     parentId: 1,
   },
   { 
     id: 4,
-    category: 'Lavar Louça',
+    name: 'Lavar Louça',
     parentId: 2,
   },
   { 
     id: 5,
-    category: 'Varrer',
+    name: 'Varrer',
     parentId: 2,
   },
   { 
     id: 6,
-    category: 'Arquitetura',
+    name: 'Arquitetura',
     parentId: 3,
   },
   { 
     id: 7,
-    category: 'Obra Jay',
+    name: 'Obra Jay',
     parentId: 6,
   },
   { 
     id: 8,
-    category: 'Compras',
+    name: 'Compras',
     parentId: 7,
   },
   { 
     id: 9,
-    category: 'Projeto',
+    name: 'Projeto',
     parentId: 7,
   },
 ];

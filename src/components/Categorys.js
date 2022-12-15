@@ -1,11 +1,13 @@
 import React, { Component } from "react";
+import categorysList from "../data/categorys"
 
 class Categorys extends Component {
     constructor() {
         super();
         this.state = {
-            categorysList: ["Casa", "Programação", "Obra", "Lazer"],
-            selected: "",
+            categorysList: categorysList,
+            selectedId: "1",
+            selectedParentId: 1,
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -13,17 +15,18 @@ class Categorys extends Component {
 
     handleChange(event) {
         this.setState({
-            selected: event.target.value
+            selectedId: event.target.value
         });
     }
 
     render() {
-        const { categorysList, selected } = this.state;
+        const { categorysList, selectedId, selectedParentId } = this.state;
         return(
             <div>
-                <select className="Drop-btn" value={ selected } defaultValue="Select a category" onChange={ this.handleChange } >
+                <select className="Drop-btn" value={ selectedId } defaultValue="Select a category" onChange={ this.handleChange } >
                     { categorysList.map((category) => (
-                            <option value={ category } key={ category }>{ category }</option>
+                            selectedParentId === category.parentId &&
+                            <option value={ category.id } key={ category.id }>{ category.name }</option>
                         ) 
                     )}
                     <option value="0"> + </option>
