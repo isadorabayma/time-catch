@@ -5,7 +5,7 @@ class Categorys extends Component {
         super();
         this.state = {
             categorysList: ["Casa", "Programação", "Obra", "Lazer"],
-            selected: "Select a category",
+            selected: "",
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -21,8 +21,7 @@ class Categorys extends Component {
         const { categorysList, selected } = this.state;
         return(
             <div>
-                <select 
-                    className="Drop-btn" value={ selected } onChange={ this.handleChange } >
+                <select className="Drop-btn" value={ selected } defaultValue="Select a category" onChange={ this.handleChange } >
                     { categorysList.map((category) => (
                             <option value={ category } key={ category }>{ category }</option>
                         ) 
