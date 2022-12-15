@@ -8,20 +8,21 @@ class Categorys extends Component {
             selected: "Select a category",
         }
 
-        this.handleOnchange = this.handleOnchange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
-    handleOnchange(event) {
+    handleChange(event) {
         this.setState({
             selected: event.target.value
         });
     }
 
     render() {
-        const { categorysList, selected, handleOnchange } = this.state;
+        const { categorysList, selected } = this.state;
         return(
             <div>
-                <select className="Drop-btn" value={ selected } onChange={ handleOnchange() } >
+                <select 
+                    className="Drop-btn" value={ selected } onChange={ this.handleChange } >
                 {/* <select className="Drop-btn" value={ selected }> */}
                     { categorysList.map((category) => (
                             <option value={ category } key={ category }>{ category }</option>
