@@ -89,7 +89,7 @@ class Counter extends Component {
     }
 
     render() {
-        const { showPause, showStart, showStop, showResume, showCategorys, showSave,
+        const { showPause, showStart, showStop, showResume, showSave,
             zMinutes, zSeconds, seconds, minutes } = this.state
         return(
             <>
@@ -98,14 +98,15 @@ class Counter extends Component {
                         {zMinutes}{minutes}:{zSeconds}{seconds}
                     </h2>
                 </div>
-                {showCategorys && <Categorys/>}
                 <div className="Align-Line">
                     {showStart && <Button onClick={ this.startTimer } title="Start"/>}
                     {showStop && <Button onClick={ this.stopTimer } title="Stop"/>}
                     {showPause && <Button onClick={ this.pauseTimer } title="Pause" />}
                     {showResume && <Button onClick={ this.resumeTimer } title="Resume" />}
-                    {showSave && <Button onClick={ this.saveTimer } title="Save" />}
                 </div>
+                <Categorys/>
+                <div className="Align-Line">{showSave && <Button onClick={ this.saveTimer } title="Save" />}</div>
+
             </>
         )
     }

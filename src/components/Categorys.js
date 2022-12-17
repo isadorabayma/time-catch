@@ -12,7 +12,7 @@ class Categorys extends Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.goBackCategory = this.goBackCategory.bind(this);
-        this.submitCategory = this.submitCategory.bind(this);
+        this.nextCategory = this.nextCategory.bind(this);
         this.catNameById = this.catNameById.bind(this);
         this.catParentIdById = this.catParentIdById.bind(this);
     }
@@ -27,9 +27,9 @@ class Categorys extends Component {
         return parentId
     }
 
-    handleChange(event) {
+    handleChange(e) {
         this.setState({
-            selectedId: event.target.value
+            selectedId: e.target.value,
         });
     }
 
@@ -37,14 +37,16 @@ class Categorys extends Component {
         e.preventDefault();
         this.setState((prevState) => ({
                 selectedParentId: this.catParentIdById(prevState.selectedParentId),
+                selectedId: prevState.selectedParentId,
             })
         );
     } 
     
-    submitCategory(e) {
+    nextCategory(e) {
         e.preventDefault();
         this.setState({
-            selectedParentId: Number(this.state.selectedId)
+            selectedParentId: Number(this.state.selectedId),
+            selectedId: "0",
         });
     }
 
@@ -53,18 +55,18 @@ class Categorys extends Component {
         return(
             <div>
                 <form>
-                    <select className="Drop-btn" value={ selectedId } defaultValue="Select a category" onChange={ this.handleChange } >
+                    {selectedParentId > 1 && <Button onClick={ this.goBackCategory } title="<" />}
+                    <select className="Drop-btn" value={ selectedId } onChange={ this.handleChange } >
                         <option value="0"> select a category </option>
                         { categorysList.map((category) => (
                                 selectedParentId === category.parentId &&
                                 <option value={ category.id } key={ category.id }>{ category.name }</option>
                             ) 
                         )}
-                        <option value="0"> + </option>
+                        <option value="+"> + </option>
                     </select>
+                    {selectedId > 1 && <Button onClick={ this.nextCategory } title=">" />}
                 </form>
-                <Button onClick={ this.goBackCategory } title="<" />
-                <Button onClick={ this.submitCategory } title=">" />
                 { this.catParentIdById(selectedParentId) > 1 &&
                 <div>
                     { this.catNameById(this.catParentIdById(selectedParentId)) }
