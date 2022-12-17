@@ -81,7 +81,7 @@ class Counter extends Component {
     saveTimer() {
         clearInterval(this.intervalId)
         const { times, seconds, minutes, categoryId } = this.state;
-        const newId = times.slice(-1)[0].id+1;
+        const newId = times.slice(-1)[0].id + 1;
         const newDuration = seconds > 30 ? minutes + 1 : minutes;
         const createdAt = new Date().toJSON().slice(11,19);
 
