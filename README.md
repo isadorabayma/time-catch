@@ -82,3 +82,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 sources:
 [https://www.youtube.com/watch?v=VQZ0qJSuWfc&ab_channel=Jo%C3%A3oRibeiro](Youtube Select on react)
 [https://github.com/tryber/sd-013-b-project-movie-card-library-crud/pull/130](movie card crud)
+[https://github.dev/tryber/sd-013-b-project-zoo-functions/tree/isadora-zoo-function-project](Zoo Function)

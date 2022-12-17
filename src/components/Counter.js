@@ -98,6 +98,7 @@ class Counter extends Component {
                         {zMinutes}{minutes}:{zSeconds}{seconds}
                     </h2>
                 </div>
+                {showCategorys && <Categorys/>}
                 <div className="Align-Line">
                     {showStart && <Button onClick={ this.startTimer } title="Start"/>}
                     {showStop && <Button onClick={ this.stopTimer } title="Stop"/>}
@@ -105,7 +106,6 @@ class Counter extends Component {
                     {showResume && <Button onClick={ this.resumeTimer } title="Resume" />}
                     {showSave && <Button onClick={ this.saveTimer } title="Save" />}
                 </div>
-                {showCategorys && <Categorys/>}
             </>
         )
     }
