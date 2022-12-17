@@ -17,6 +17,10 @@ class Categorys extends Component {
         this.catParentIdById = this.catParentIdById.bind(this);
     }
 
+    // componentDidUpdate() {
+    //     this.props.handleCategory(this.state.selectedParentId)
+    // }
+
     catNameById(id) {
             const name = categorysList.find((category) => category.id === id).name;
             return name
@@ -40,6 +44,7 @@ class Categorys extends Component {
                 selectedId: prevState.selectedParentId,
             })
         );
+        this.props.handleCategory(this.catParentIdById(this.state.selectedParentId));
     } 
     
     nextCategory(e) {
@@ -48,10 +53,12 @@ class Categorys extends Component {
             selectedParentId: Number(this.state.selectedId),
             selectedId: "0",
         });
+        this.props.handleCategory(Number(this.state.selectedId));
     }
 
     render() {
         const { selectedId, selectedParentId } = this.state;
+        // this.props.handleCategory(this.state.selectedParentId)
         return(
             <div>
                 <form>

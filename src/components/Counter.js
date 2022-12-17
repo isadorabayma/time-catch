@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Button from "./Button";
 import Categorys from "./Categorys";
+import times from "../data/times";
 
 class Counter extends Component {
     constructor() {
@@ -15,6 +16,8 @@ class Counter extends Component {
             showStop: false,
             showResume: false,
             showCategorys: false,
+            categoryId: 0,
+            times: times,
         }
 
         this.startTimer = this.startTimer.bind(this);
@@ -22,6 +25,7 @@ class Counter extends Component {
         this.stopTimer = this.stopTimer.bind(this);
         this.resumeTimer = this.resumeTimer.bind(this);
         this.saveTimer = this.saveTimer.bind(this);
+        this.handleCategory = this.handleCategory.bind(this);
     }
 
     startTimer() {
@@ -76,6 +80,12 @@ class Counter extends Component {
 
     saveTimer() {
         clearInterval(this.intervalId)
+        const { times, seconds, minutes, categoryId } = this.state;
+        const newId = times.slice(-1)[0].id+1;
+        const newDuration = seconds > 30 ? minutes + 1 : minutes;
+        const createdAt = new Date().toJSON().slice(11,19);
+
+
         this.setState((prevState) => ({
             showSave: !prevState.showSave,
             showStart: !prevState.showStart,
@@ -85,7 +95,17 @@ class Counter extends Component {
             minutes: 0,
             zSeconds: 0,
             zMinutes: 0,
+            times: [...times, {
+                id: newId,
+                durationMin: newDuration,
+                startDataAndTime: createdAt,
+                categoryId: categoryId,
+            }]
         }));
+    }
+
+    handleCategory(categoryId) {
+        this.setState({ categoryId: categoryId });
     }
 
     render() {
@@ -104,7 +124,7 @@ class Counter extends Component {
                     {showPause && <Button onClick={ this.pauseTimer } title="Pause" />}
                     {showResume && <Button onClick={ this.resumeTimer } title="Resume" />}
                 </div>
-                <Categorys/>
+                <Categorys handleCategory={ this.handleCategory } />
                 <div className="Align-Line">{showSave && <Button onClick={ this.saveTimer } title="Save" />}</div>
 
             </>
