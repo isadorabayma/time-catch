@@ -4,15 +4,6 @@ import Categorys from './Categorys';
 import times from '../data/times';
 
 class Counter extends Component {
-  static zSeconds(seconds, zSeconds) {
-    if (seconds === 9) {
-      return null;
-    } if (seconds === 59) {
-      return 0;
-    }
-    return zSeconds;
-  }
-
   constructor() {
     super();
     this.state = {
@@ -24,7 +15,6 @@ class Counter extends Component {
       showPause: false,
       showStop: false,
       showResume: false,
-      //   showCategorys: false,
       categoryId: 0,
       timesList: times,
     };
@@ -46,9 +36,9 @@ class Counter extends Component {
       this.setState((prevState) => ({
         seconds: prevState.seconds === 59 ? 0 : prevState.seconds + 1,
         minutes: prevState.seconds === 59 ? prevState.minutes + 1 : prevState.minutes,
-        // zSeconds: prevState.seconds === 9 ? null
-        //   : (prevState.seconds === 59 ? 0 : prevState.zSeconds),
-        zSeconds: this.zSeconds(prevState.seconds, prevState.zSeconds),
+        // eslint-disable-next-line no-nested-ternary
+        zSeconds: prevState.seconds === 9 ? null
+          : (prevState.seconds === 59 ? 0 : prevState.zSeconds),
         zMinutes: (prevState.minutes === 9 && prevState.seconds === 59) ? null : prevState.zMinutes,
       }));
     }, 1000);
@@ -72,7 +62,9 @@ class Counter extends Component {
       this.setState((prevState) => ({
         seconds: prevState.seconds === 59 ? 0 : prevState.seconds + 1,
         minutes: prevState.seconds === 59 ? prevState.minutes + 1 : prevState.minutes,
-        zSeconds: this.zSeconds(prevState.seconds, prevState.zSeconds),
+        // eslint-disable-next-line no-nested-ternary
+        zSeconds: prevState.seconds === 9 ? null
+          : (prevState.seconds === 59 ? 0 : prevState.zSeconds),
         zMinutes: (prevState.minutes === 9 && prevState.seconds === 59) ? null : prevState.zMinutes,
       }));
     }, 1000);
@@ -89,7 +81,6 @@ class Counter extends Component {
       showStop: !prevState.showStop,
       showPause: false,
       showResume: false,
-      // showCategorys: true,
     }));
   }
 
@@ -105,8 +96,6 @@ class Counter extends Component {
     this.setState((prevState) => ({
       showSave: !prevState.showSave,
       showStart: !prevState.showStart,
-      // showCategorys: false,
-      // categorySelected: 'Select a category',
       seconds: 0,
       minutes: 0,
       zSeconds: 0,
